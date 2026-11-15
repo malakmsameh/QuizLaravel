@@ -14,6 +14,14 @@ class DashboardController extends Controller
     //
 	public function index()
 	{
-		$active_lect = Lecturer::with('user')->withCount('courses')->get();
+		$total_Lecturers = Lecturer::count();
+
+		$total_Courses = Courses::count();
+
+		$total_Lectures = Lecture::count();
+
+		$total_Enrollments = Course_user::count();
+
+		return view('dashboard', compact('total_Lecturers', 'total_Courses', 'total_Lectures', 'total_Enrollments'));
 	}
 }
