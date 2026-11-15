@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Courses extends Model
 {
-    /** @use HasFactory<\Database\Factories\CoursesFactory> */
+	/** @use HasFactory<\Database\Factories\CoursesFactory> */
     use HasFactory;
 
 		protected $fillable = [
@@ -22,17 +22,28 @@ class Courses extends Model
 
 	public function lecturer()
 	{
-		return $this->belongsTo(Lecturer::class);
+		return $this->belongsTo(Lecturer::class,'lecturer_id');
 	}
 
 	public function lectures()
 	{
-		return $this->hasMany(Lecture::class);
+		return $this->hasMany(Lecture::class, 'course_id');
 	}
+
+	// public function users()
+	// {
+	// 	return $this->belongsToMany(User::class, 'course_user')->withPivot('enrollment_date', 'grade')->withTimestamps();
+	// }
+
 
 	public function users()
 	{
-		return $this->belongsToMany(User::class, 'course_user')->withPivot('enrollment_date', 'grade')->withTimestamps();
+		return $this->belongsToMany(
+			User::class,
+			'course_user',
+			'course_id',
+			'user_id'
+		)->withPivot('enrollment_date', 'grade')->withTimestamps();
 	}
 
 }

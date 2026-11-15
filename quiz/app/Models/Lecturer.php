@@ -13,6 +13,7 @@ class Lecturer extends Model
     use HasFactory,SoftDeletes;
 
 	protected $fillable = [
+		'user_id',
 		'employee_number',
 		'department',
 		'office_room',

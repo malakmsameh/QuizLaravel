@@ -12,6 +12,7 @@ class Lecture extends Model
     use HasFactory;
 
 	protected $fillable = [
+	'course_id',
 	'title',
 	'topic_summary',
 	'hall_name',

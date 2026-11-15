@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
+	/** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -52,15 +52,21 @@ class User extends Authenticatable
 	// 	return $this->belongsToMany(Courses::class);
 	// }
 
+	public function courses()
+	{
+		return $this->belongsToMany(
+			Courses::class,
+			'course_user',
+			'user_id',
+			'course_id'
+		)->withPivot('enrollment_date', 'grade')->withTimestamps();
+	}
+
 	public function lecturer()
 	{
 		return $this->hasOne(Lecturer::class);
 	}
 
 
-	public function courses()
-	{
-		return $this->belongsToMany(Courses::class, 'course_user')->withPivot('enrollment_date', 'grade')->withTimestamps();
-	}
 
 }
