@@ -4,27 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-// $table->id();
-// $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-// $table->string('employee_number')->nullable();
-// $table->string('department');
-// $table->string('office_room');
-// $table->string('photo');
-// $table->enum('isActivated', ['isActivated', 'isDeactivated'])->default('isActivated');
-// $table->timestamps();
 
 class Lecturer extends Model
 {
     /** @use HasFactory<\Database\Factories\LecturerFactory> */
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
 	protected $fillable = [
-		'name',
-		'email',
-		'phone',
-		'address',
-		'password',
+		'employee_number',
+		'department',
+		'office_room',
+		'photo',
+		'isActivated',
+		'academic_rank',
 	];
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
+	public function courses()
+	{
+		return $this->hasMany(Courses::class,'lecturer_id');
+	}
+
 }

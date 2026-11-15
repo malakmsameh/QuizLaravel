@@ -17,8 +17,10 @@ return new class extends Migration
 			$table->string('employee_number')->nullable();
 			$table->string('department');
 			$table->string('office_room');
-			$table->string('photo');
+			$table->string('photo')->nullable();
 			$table->enum('isActivated', ['isActivated', 'isDeactivated'])->default('isActivated');
+			$table->string('academic_rank')->nullable();
+			$table->softDeletes();
             $table->timestamps();
         });
     }
