@@ -13,6 +13,9 @@ class LecturerController extends Controller
     public function index()
     {
         //
+		$lecturers = Lecturer::where('isActivated', 'isActivated')->with('user')->withCount('courses')->get();
+
+		return view('lecturers.index', compact('lecturers'));
     }
 
     /**
