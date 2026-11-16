@@ -19,7 +19,7 @@ class Lecture extends Model
 	'scheduled_at',
 	];
 
-	public function course_lecture()
+	public function course()
 	{
 		return $this->belongsTo(Courses::class,'course_id');
 	}

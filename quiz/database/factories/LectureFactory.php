@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Lecture;
+use App\Models\Courses;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +21,11 @@ class LectureFactory extends Factory
     {
         return [
             //
+			'course_id' => Courses::factory(),
+            'title' => 'Lecture ' . fake()->numberBetween(1, 15) . ': ' . fake()->sentence(2),
+            'topic_summary' => fake()->paragraph(),
+            'hall_name' => 'Hall ' . fake()->randomLetter(),
+            'scheduled_at' => fake()->time('H:i:s'),
         ];
     }
 }
